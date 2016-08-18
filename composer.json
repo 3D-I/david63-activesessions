@@ -17,7 +17,7 @@
 	"extra": {
 		"display-name": "Active sessions",
 		"soft-require": {
-         "phpbb/phpbb": ">=3.2.0-RC1",
+         "phpbb/phpbb": ">=3.2.0-RC1"
       }
 	}
 }
