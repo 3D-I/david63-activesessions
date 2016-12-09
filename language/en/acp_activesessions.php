@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACTIVE_SESSIONS_EXPLAIN'	=> 'Here is a list of the current active sessions on the board.<br />Click on “session IP” to expand details.',
+	'ACTIVE_SESSIONS_EXPLAIN'	=> 'Here is a list of the current active sessions on the board.<br /><br />Click on “Session IP” to expand IP details.<br />Click on “Session ID” to expand session details.',
 	'ADMIN_USER'				=> 'Admin user',
 	'ALL'						=> 'All',
 	'AUTO_LOGIN'				=> 'Auto login set',
@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'OTHER'						=> 'Other',
 
 	'SELECT_CHAR'				=> 'Select character',
-	'SESSION_FORWARD_FOR'		=> 'Session forwaeded for',
+	'SESSION_FORWARD_FOR'		=> 'Session forwarded for',
 	'SESSION_IP'				=> 'Session IP',
 	'SESSION_ID'				=> 'Session ID',
 	'SESSION_START'				=> 'Session start',

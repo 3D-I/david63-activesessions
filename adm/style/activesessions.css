@@ -1,0 +1,11 @@
+/**
+* activesessions.css
+**/
+
+td.showkey {
+   cursor: pointer;
+}
+
+tr.rowkey {
+	display: none;
+}

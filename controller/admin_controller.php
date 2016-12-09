@@ -10,62 +10,76 @@
 namespace david63\activesessions\controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use david63\activesessions\ext;
+use phpbb\config\config;
+use phpbb\db\driver\driver_interface;
+use phpbb\request\request;
+use phpbb\template\template;
+use phpbb\pagination;
+use phpbb\user;
+use phpbb\language\language;
+use \david63\activesessions\ext;
 
 /**
 * Admin controller
 */
 class admin_controller implements admin_interface
 {
-	const ACTIVE_SESSIONS_VERSION = '1.0.0';
-
-	/** @var \phpbb\config\config */
+	/** @var \config */
 	protected $config;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var \driver_interface */
 	protected $db;
 
-	/** @var \phpbb\request\request */
+	/** @var \request */
 	protected $request;
 
-	/** @var \phpbb\template\template */
+	/** @var \template */
 	protected $template;
 
-	/** @var \phpbb\pagination */
+	/** @var \pagination */
 	protected $pagination;
 
-	/** @var \phpbb\user */
+	/** @var \user */
 	protected $user;
 
-	/** @var phpbb\language\language */
+	/** @var \language */
 	protected $language;
+
+	/** @var string phpBB extension */
+	protected $php_ext;
+
+	/** @var string phpBB table prefix */
+	protected $phpbb_table_prefix;
 
 	/** @var string Custom form action */
 	protected $u_action;
 
-	/**
-	* Constructor for admin controller
-	*
-	* @param \phpbb\config\config				$config		Config object
-	* @param \phpbb\db\driver\driver_interface	$db
-	* @param \phpbb\request\request				$request	Request object
-	* @param \phpbb\template\template			$template	Template object
-	* @param \phpbb\pagination					$pagination
-	* @param \phpbb\user						$user		User object
-	* @param phpbb\language\language			$language
-	*
-	* @return \david63\activesessions\controller\admin_controller
-	* @access public
-	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\pagination $pagination, \phpbb\user $user, \phpbb\language\language $language)
+    /**
+     * Constructor for admin controller
+     *
+     * @param \config|config                     	$config   		Config object
+     * @param \driver_interface|driver_interface 	$db
+     * @param \request|\request                   	$request  		Request object
+     * @param \template|\template                 	$template 		Template object
+     * @param \pagination|pagination             	$pagination
+     * @param \user|\user                         	$user     		User object
+     * @param \language|language                 	$language
+	 * @param string								$root_path
+	 * @param string								$php_ext
+     *
+     * @access public
+     */
+	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext)
 	{
-		$this->config		= $config;
-		$this->db  			= $db;
-		$this->request		= $request;
-		$this->template		= $template;
-		$this->pagination	= $pagination;
-		$this->user			= $user;
-		$this->language		= $language;
+		$this->config			= $config;
+		$this->db  				= $db;
+		$this->request			= $request;
+		$this->template			= $template;
+		$this->pagination		= $pagination;
+		$this->user				= $user;
+		$this->language			= $language;
+		$this->phpbb_root_path	= $phpbb_root_path;
+		$this->php_ext			= $php_ext;
 	}
 
 	/**
@@ -108,7 +122,7 @@ class admin_controller implements admin_interface
 		}
 
 	   	$sql = $this->db->sql_build_query('SELECT', array(
-			'SELECT'	=> 'u.user_id, u.username, u.username_clean, u.user_colour, s.*, f.forum_id, f.forum_name',
+			'SELECT'	=> 'u.user_id, u.username, u.username_clean, u.user_colour, u.user_ip, s.*, f.forum_id, f.forum_name',
 			'FROM'		=> array(
 				USERS_TABLE		=> 'u',
 				SESSIONS_TABLE	=> 's',
@@ -143,6 +157,7 @@ class admin_controller implements admin_interface
 				'SESSION_START'		=> $this->user->format_date($row['session_start']),
 				'SESSION_TIME'		=> $this->user->format_date($row['session_time']),
 				'USERNAME'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+				'U_WHOIS'			=> append_sid("{$this->phpbb_root_path}adm/index.$this->php_ext", "i=acp_users&amp;action=whois&amp;user_ip={$row['user_ip']}"),
 		   	));
 		}
 		$this->db->sql_freeresult($result);
@@ -215,6 +230,6 @@ class admin_controller implements admin_interface
 	*/
 	public function set_page_url($u_action)
 	{
-		$this->u_action = $u_action;
+		return $this->u_action = $u_action;
 	}
 }

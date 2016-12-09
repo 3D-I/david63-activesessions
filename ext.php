@@ -9,7 +9,13 @@
 
 namespace david63\activesessions;
 
-class ext extends \phpbb\extension\base
+use phpbb\extension\base;
+
+/**
+ * @property  container
+ */
+
+class ext extends base
 {
 	const ACTIVE_SESSIONS_VERSION = '2.1.0';
 

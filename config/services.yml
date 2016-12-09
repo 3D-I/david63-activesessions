@@ -9,3 +9,5 @@ services:
             - '@pagination'
             - '@user'
             - '@language'
+            - '%core.root_path%'
+            - '%core.php_ext%'

@@ -13,12 +13,16 @@ class activesessions_module
 {
 	public $u_action;
 
-	function main($id, $mode)
+    /**
+     * @param $id
+     * @param $mode
+     */
+    function main($id, $mode)
 	{
-		global $phpbb_container, $user;
+		global $phpbb_container;
 
 		$this->tpl_name		= 'active_sessions';
-		$this->page_title	= $user->lang('ACTIVE_SESSIONS');
+		$this->page_title	= $phpbb_container->get('language')->lang('ACTIVE_SESSIONS');
 
 		// Get an instance of the admin controller
 		$admin_controller = $phpbb_container->get('david63.activesessions.admin.controller');
