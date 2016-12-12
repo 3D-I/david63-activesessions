@@ -1,4 +1,4 @@
-;{
+jQuery(function() {
 	$(document).ready(function()
 	{
      	$('.showkey').on('click', function()
@@ -19,5 +19,4 @@
 			return false;
 		});
   	});
-}//noinspection BadExpressionStatementJS
-(jQuery);
+});
