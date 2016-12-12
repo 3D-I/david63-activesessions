@@ -14,8 +14,8 @@ class activesessions_module
 	public $u_action;
 
     /**
-     * @param $id
-     * @param $mode
+     * @internal param $id
+     * @internal param $mode
      */
     function main($id, $mode)
 	{

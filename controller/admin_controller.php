@@ -17,7 +17,7 @@ use phpbb\template\template;
 use phpbb\pagination;
 use phpbb\user;
 use phpbb\language\language;
-use \david63\activesessions\ext;
+use david63\activesessions\ext;
 
 /**
 * Admin controller
@@ -57,17 +57,18 @@ class admin_controller implements admin_interface
     /**
      * Constructor for admin controller
      *
-     * @param \config|config                     	$config   		Config object
-     * @param \driver_interface|driver_interface 	$db
-     * @param \request|\request                   	$request  		Request object
-     * @param \template|\template                 	$template 		Template object
-     * @param \pagination|pagination             	$pagination
-     * @param \user|\user                         	$user     		User object
-     * @param \language|language                 	$language
-	 * @param string								$root_path
-	 * @param string								$php_ext
+     * @param \config|config                     $config   			Config object
+     * @param \driver_interface|driver_interface $db				Database object
+     * @param \request|request                   $request  			Request object
+     * @param \template|template                 $template			Template object
+     * @param \pagination|pagination             $pagination		Pagination object
+     * @param \user|user                         $user     			User object
+     * @param \language|language                 $language			Language object
+     * @param                                    $phpbb_root_path	phpBB root path
+     * @param string                             $php_ext			PHP extension
      *
-     * @access public
+	 * @return \david63\activesessions\controller\admin_controller
+     * @access   public
      */
 	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext)
 	{
@@ -150,14 +151,14 @@ class admin_controller implements admin_interface
 				'LAST_VISIT'		=> $this->user->format_date($row['session_last_visit']),
 				'SESSION_FORWARD'	=> $row['session_forwarded_for'],
 				'SESSION_ID'		=> $row['session_id'],
-				'SESSION_IP'		=> $row['user_ip'],
+				'SESSION_IP'		=> $row['session_ip'],
 				'SESSION_KEY'		=> $row['session_id'] . $row['user_id'], // Create a unique key for the js script
 				'SESSION_ONLINE'	=> ($row['session_viewonline']) ? $this->language->lang('YES') : $this->language->lang('NO'),
 				'SESSION_PAGE'		=> $row['session_page'],
 				'SESSION_START'		=> $this->user->format_date($row['session_start']),
 				'SESSION_TIME'		=> $this->user->format_date($row['session_time']),
 				'USERNAME'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
-				'U_WHOIS'			=> append_sid("{$this->phpbb_root_path}adm/index.$this->php_ext", "i=acp_users&amp;action=whois&amp;user_ip={$row['user_ip']}"),
+				'U_WHOIS'			=> append_sid("{$this->phpbb_root_path}adm/index.$this->php_ext", "i=acp_users&amp;action=whois&amp;user_ip={$row['session_ip']}"),
 		   	));
 		}
 		$this->db->sql_freeresult($result);

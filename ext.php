@@ -12,8 +12,8 @@ namespace david63\activesessions;
 use phpbb\extension\base;
 
 /**
- * @property  container
- */
+* @property  container
+*/
 
 class ext extends base
 {

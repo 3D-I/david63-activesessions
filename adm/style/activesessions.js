@@ -19,4 +19,5 @@
 			return false;
 		});
   	});
-}(jQuery);
+}//noinspection BadExpressionStatementJS
+(jQuery);
