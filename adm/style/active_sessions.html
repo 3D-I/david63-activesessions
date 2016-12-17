@@ -6,15 +6,15 @@
 <h1>{{ lang('ACTIVE_SESSIONS') }}</h1>
 <p>{{ lang('ACTIVE_SESSIONS_EXPLAIN') }}</p>
 
-<form id="list" method="post" action="{U_ACTION}">
+<form id="list" method="post" action="{{ U_ACTION }}">
 
 <div class="pagination">
 	{% if pagination or TOTAL_USERS %}
-   		{TOTAL_USERS}
+   		{{ TOTAL_USERS }}
 		{% if pagination %}
 			&bull; {% include 'pagination.html' %}
 		{% else %}
-			&bull; {PAGE_NUMBER}
+			&bull; {{ PAGE_NUMBER }}
 		{% endif %}
 	{% endif %}
 </div>
@@ -25,7 +25,7 @@
 <thead>
 	<tr>
 		<th>{{ lang('FILTER_BY') }}</th>
-		<th>{{ lang('SELECT_CHAR') }}<img style="float: {S_CONTENT_FLOW_END};" src="https://img.shields.io/badge/{{ lang('VERSION') }}-{ACTIVE_SESSIONS_VERSION}-orange.svg?style=plastic" /></th>
+		<th>{{ lang('SELECT_CHAR') }}<img style="float: {{ S_CONTENT_FLOW_END }};" src="https://img.shields.io/badge/{{ lang('VERSION') }}-{{ ACTIVE_SESSIONS_VERSION }}-orange.svg?style=plastic" /></th>
 	</tr>
 </thead>
 
@@ -34,7 +34,7 @@
 		<td><strong>{{ lang('FILTER_USERNAME') }}</strong></td>
 		<td>
 			{% for char in first_char %}
-				<a href="{char.U_SORT}">{char.DESC}</a>&nbsp;
+				<a href="{{ char.U_SORT }}">{{ char.DESC }}</a>&nbsp;
 			{% endfor %}
 		</td>
 	</tr>
@@ -43,7 +43,7 @@
 </table>
 
 <fieldset class="display-options">
-	{{ lang('SORT_BY') }} {{ lang('COLON') }} {S_SORT_KEY} {S_SORT_DIR}
+	{{ lang('SORT_BY') }} {{ lang('COLON') }} {{ S_SORT_KEY }} {{ S_SORT_DIR }}
 	<input class="button2" type="submit" value="{{ lang('GO') }}" name="sort" />
 </fieldset>
 
@@ -60,50 +60,50 @@
 <tbody>
 	{% for sessions in active_sessions %}
 		{% if sessions.S_ROW_COUNT is even %}<tr class="row1">{% else %}<tr class="row2">{% endif %}
-			<td>{sessions.USERNAME}</td>
-			<td><a href="{sessions.U_WHOIS}" class="whois">{sessions.SESSION_IP}</a></td>
-			<td class="showkey" key="{sessions.SESSION_KEY}">{sessions.SESSION_ID}</td>
-			<td>{sessions.SESSION_START}</td>
+			<td>{{ sessions.USERNAME }}</td>
+			<td><a href="{{ sessions.U_WHOIS }}" class="whois">{{ sessions.SESSION_IP }}</a></td>
+			<td class="showkey" key="{{ sessions.SESSION_KEY }}">{{ sessions.SESSION_ID }}</td>
+			<td>{{ sessions.SESSION_START }}</td>
 		</tr>
 
-		<tr class="rowkey" id="{sessions.SESSION_KEY}">
+		<tr class="rowkey" id="{{ sessions.SESSION_KEY }}">
 			<td colspan="4" class="content">
 				<table>
 					<tr>
 						<td>{{ lang('SESSION_TIME') }} {{ lang('COLON') }}</td>
-						<td>{sessions.SESSION_TIME}</td>
+						<td>{{ sessions.SESSION_TIME }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('LAST_VISIT') }} {{ lang('COLON') }}</td>
-						<td>{sessions.LAST_VISIT}</td>
+						<td>{{ sessions.LAST_VISIT }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('BROWSER') }} {{ lang('COLON') }}</td>
-						<td>{sessions.BROWSER}</td>
+						<td>{{ sessions.BROWSER }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('USER_PAGE') }} {{ lang('COLON') }}</td>
-						<td><a href="{sessions.SESSION_PAGE}">{sessions.SESSION_PAGE}</a></td>
+						<td><a href="{{ sessions.SESSION_PAGE }}">{{ sessions.SESSION_PAGE }}</a></td>
 					</tr>
 					<tr>
 						<td>{{ lang('FORUM') }} {{ lang('COLON') }}</td>
-						<td>{sessions.FORUM}</td>
+						<td>{{ sessions.FORUM }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('SESSION_FORWARD_FOR') }} {{ lang('COLON') }}</td>
-						<td>{sessions.SESSION_FORWARD}</td>
+						<td>{{ sessions.SESSION_FORWARD }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('AUTO_LOGIN') }} {{ lang('COLON') }}</td>
-						<td>{sessions.AUTO_LOGIN}</td>
+						<td>{{ sessions.AUTO_LOGIN }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('SESSION_VIEWONLINE') }} {{ lang('COLON') }}</td>
-						<td>{sessions.SESSION_ONLINE}</td>
+						<td>{{ sessions.SESSION_ONLINE }}</td>
 					</tr>
 					<tr>
 						<td>{{ lang('ADMIN_USER') }} {{ lang('COLON') }}</td>
-						<td>{sessions.ADMIN}</td>
+						<td>{{ sessions.ADMIN }}</td>
 					</tr>
 				</table>
 			</td>
@@ -119,7 +119,7 @@
 	{% if pagination %}
 		&bull; {% include 'pagination.html' %}
 	{% else %}
-		&bull; {PAGE_NUMBER}
+		&bull; {{ PAGE_NUMBER }}
 	{% endif %}
 </div>
 
