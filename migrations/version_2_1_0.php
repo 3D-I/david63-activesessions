@@ -11,13 +11,11 @@ namespace david63\activesessions\migrations;
 
 use phpbb\db\migration\migration;
 
-class version_1_0_0 extends migration
+class version_2_1_0 extends migration
 {
 	public function update_data()
 	{
 		$update_data = array();
-
-		$update_data[] = array('config.add', array('version_activesessions', '1.0.0'));
 
 		if ($this->module_check())
 		{
