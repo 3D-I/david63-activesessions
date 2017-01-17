@@ -1,7 +1,7 @@
 {
 	"name": "david63/activesessions",
 	"type": "phpbb-extension",
-	"description": "Adds an Admin option to display the current active user sessions",
+	"description": "Adds an Admin option to display the current active user sessions.",
 	"keywords": [
 		"phpbb",
 		"extension",
